@@ -24,7 +24,7 @@ module.exports = {
     },
 
     createProduct: async (req, res) => {
-        const {name, price} = req.query;
+        const {name, price} = req.body;
 
         let newListProduct = await productService.createProduct(name, price);
         await res.json(newListProduct);

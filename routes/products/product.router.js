@@ -11,7 +11,7 @@ router.get('/:id',productController.getAllProductById);
 
 router.delete('/:name', productController.deleteProduct);
 
-router.post(`/product`,productMiddleware,productController.createProduct);   //product?name=name&price=price
+router.post(`/product`,productMiddleware,productController.createProduct);
 
 router.put('/',productUpdateMiddleware,productController.updateProduct); //
 

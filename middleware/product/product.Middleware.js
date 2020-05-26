@@ -2,7 +2,7 @@
 
 module.exports = (req, res, next) => {
     try {
-        const { name,price } = req.query;
+        const { name,price } = req.body;
 
         if (!name || !price) {
             throw new Error()
