@@ -1,5 +1,5 @@
-const { productService }=require('../../services');
-const {dataBase} =require('../../models/product-model')
+const {productService} = require('../../services');
+
 
 module.exports = {
 
@@ -10,21 +10,31 @@ module.exports = {
 
     getAllProductById: async (req, res) => {
         const id = req.params.id;
+
         const product = productService.getProductById(id);
         await res.json(product.name);
     },
 
     deleteProduct: async (req, res) => {
         const product = req.params.name;
-        const a = await productService.deleteProduct(product);
-        await res.json(a);
+
+        const filterProduct = await productService.deleteProduct(product);
+        await res.json(filterProduct);
 
     },
 
-    createProduct: async  (req, res) => {
-        const {name} = req.query;
-        let newListProduct = await productService.createProduct(name);
+    createProduct: async (req, res) => {
+        const {name, price} = req.query;
+
+        let newListProduct = await productService.createProduct(name, price);
         await res.json(newListProduct);
+    },
+
+    updateProduct: async (req, res) => {
+        const {name, price} = req.query;
+
+        const updateProduct = await productService.updateProduct(name, price);
+        await res.json(updateProduct)
     }
 
 };

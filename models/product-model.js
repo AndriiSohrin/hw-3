@@ -3,28 +3,28 @@ const dataBase = [
     {
         id: '1',
         name: 'potatoes',
+        price: 1200
     },
     {
         id: '2',
         name: 'tomato',
+        price: 1300
     },
     {
         id: '3',
         name: 'carrots',
+        price: 1230
     },
 
 ];
 
 class Product{
-    constructor(id,name){
+    constructor(id,name,price ){
         this.id = id;
         this.name = name;
-    }
+        this.price = price;
 
-    // create(name){
-    //   const a = {id : (dataBase.length+1).toString(), name};
-    //   dataBase.push(a)
-    // }
+    }
 
 };
 

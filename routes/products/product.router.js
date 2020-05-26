@@ -1,21 +1,20 @@
 const {Router} = require('express');
 const router = Router();
-const {dataBase, Product} = require('../../models/product-model')
 
 const {productController} = require('../../controller');
-const {productMiddleware,productMiddlewareID}= require('../../middleware');
+const {productMiddleware,productUpdateMiddleware}= require('../../middleware');
 
 
 router.get('/',productController.getAllProduct);
 
-router.get('/:id',productMiddlewareID,productController.getAllProductById);
-
+router.get('/:id',productController.getAllProductById);
 
 router.delete('/:name', productController.deleteProduct);
 
+router.post(`/product`,productMiddleware,productController.createProduct);   //product?name=name&price=price
 
-router.post(`/new_product`,productMiddleware,productController.createProduct);   //new_product?name=name
+router.put('/',productUpdateMiddleware,productController.updateProduct); //
 
-// з update поки не получаэться, пробую
+
 
 module.exports = router;

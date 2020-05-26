@@ -11,7 +11,7 @@ app.use(express.urlencoded());
 app.use(productRoutes);
 
 
-app.listen(3000, ()=> {
+app.listen(3002, ()=> {
     console.log('server has been started')
 });
 
