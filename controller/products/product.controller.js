@@ -4,37 +4,65 @@ const {productService} = require('../../services');
 module.exports = {
 
     getAllProduct: async (req, res) => {
-        let product = await productService.getAllProduct();
-        await res.json(product);
+
+        try {
+
+            let products = await productService.getAllProduct()
+            res.json(products)
+
+        } catch (error) {
+            res.json(error)
+        }
+
     },
 
-    getAllProductById: async (req, res) => {
+
+    getProductById: async (req, res) => {
         const id = req.params.id;
 
-        const product = productService.getProductById(id);
-        await res.json(product.name);
+        try {
+
+            let product = await productService.getProductById(id);
+            res.json(product)
+
+        } catch (error) {
+            res.json(error)
+        }
     },
+
 
     deleteProduct: async (req, res) => {
-        const product = req.params.name;
+        const name = req.params.name;
 
-        const filterProduct = await productService.deleteProduct(product);
-        await res.json(filterProduct);
-
+        try {
+            await productService.deleteProduct(name)
+        } catch (e) {
+            res.json(e)
+        }
+        res.end()
     },
+
 
     createProduct: async (req, res) => {
-        const {name, price} = req.body;
 
-        let newListProduct = await productService.createProduct(name, price);
-        await res.json(newListProduct);
+        try {
+            await productService.createProduct(req.body)
+        } catch (e) {
+            res.json(e)
+        }
+        res.end()
     },
+
 
     updateProduct: async (req, res) => {
         const {name, price} = req.query;
 
-        const updateProduct = await productService.updateProduct(name, price);
-        await res.json(updateProduct)
+        try {
+            await productService.updateProduct(name, price)
+        } catch (e) {
+            res.json(e)
+        }
+        res.end()
     }
 
 };

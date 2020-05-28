@@ -5,15 +5,16 @@ const {productController} = require('../../controller');
 const {productMiddleware,productUpdateMiddleware}= require('../../middleware');
 
 
+
+router.post('/',productMiddleware,productController.createProduct);
+
 router.get('/',productController.getAllProduct);
 
-router.get('/:id',productController.getAllProductById);
+router.get('/:id',productController.getProductById);
 
-router.delete('/:name', productController.deleteProduct);
+router.put('/',productUpdateMiddleware,productController.updateProduct);
 
-router.post(`/product`,productMiddleware,productController.createProduct);
-
-router.put('/',productUpdateMiddleware,productController.updateProduct); //
+router.delete('/:name',productController.deleteProduct);
 
 
 

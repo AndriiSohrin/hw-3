@@ -1,41 +1,46 @@
-const {dataBase, Product} = require('../models/product-model')
+const db = require('../database').getInstance();
 
-class ProductService {
+module.exports = {
 
-    getAllProduct() {
-        return dataBase
-    }
+    getAllProduct: () => {
+        const ProductModel = db.getModel('Product');
 
-    getProductById(id) {
-        return dataBase.find(el => el.id === id);
-    }
+        return ProductModel.findAll({})
+    },
 
-    deleteProduct(product) {
-        return dataBase.filter(el => el.name !== product);
-    }
 
-    createProduct(name, price) {
-        const id = (dataBase.length + 1).toString();
+    getProductById: ( id ) => {
+        const ProductModel = db.getModel('Product');
 
-        const newProduct = new Product(id, name, price);
-        dataBase.push(newProduct);
-        return dataBase
-    }
+        return ProductModel.findAll({
+            where: { id }
+        })
+    },
 
-    updateProduct(name, newPrice) {
-        let updateData = [];
 
-        dataBase.map(el => {
+    createProduct: ( user ) => {
+        const ProductModel = db.getModel('Product');
 
-            if (el.name === name) {
-                el.price = newPrice;
-                updateData.push(el)
-            }
-            return updateData
+        return ProductModel.create( user )
+    },
+
+
+    updateProduct: ( name, newPrice ) => {
+        const ProductModel = db.getModel('Product');
+
+        return ProductModel.update(
+            { price: newPrice },
+            { where: { name } }
+        );
+    },
+
+
+    deleteProduct: ( name ) => {
+        const ProductModel = db.getModel('Product');
+
+        return ProductModel.destroy({
+            where: { name }
         })
     }
 
-
-}
-
-module.exports = new ProductService;
+};
